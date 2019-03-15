@@ -26,8 +26,16 @@ router.get('/:isbn', (req, res, next) => {
 //#region CREATE A BOOK
 
 router.post('/', (req, res, next) => {
+    const book = {
+        title: req.body.title,
+        author: req.body.author,
+        subject: req.body.subject,
+        isbn: req.body.isbn
+    };
+
     res.status(201).json({
-        message: 'Handling POST request to create a book'
+        message: 'Handling POST request to create a book',
+        createdBook: book
     });
 });
 

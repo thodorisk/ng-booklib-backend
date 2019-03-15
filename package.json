@@ -15,8 +15,9 @@
     "@babel/preset-env": "^7.3.4",
     "babel-cli": "^6.26.0",
     "babel-watch": "^7.0.0",
-    "nodemon": "^1.18.10",
-    "morgan": "^1.9.1"
+    "body-parser": "^1.18.3",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
   },
   "dependencies": {
     "cors": "^2.8.5",
