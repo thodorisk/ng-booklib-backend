@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const bookRoutes = require('./api/routes/books');
+
+mongoose.connect('mongodb+srv://theodor_85:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-yqdpw.mongodb.net:/test?retryWrites=true', { useNewUrlParser: true });
 
 
 // Useful middlewares
