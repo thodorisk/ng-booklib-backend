@@ -10,13 +10,16 @@ const Book = require('../models/book');
 
 router.get('/', (req, res, next) => {
     Book.find()
+    .select('_id title author category year isbn')
     .exec()
     .then(books => {
-        console.log(books);
-        res.status(200).json(books);
+        const response = {
+            count: books.length,
+            books: books
+        }
+        res.status(200).json(response);
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({
             error: err
         });
@@ -30,9 +33,10 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     Book.findById(id)
+        .select('_id title author category isbn year')
         .exec()
         .then(book => {
-            console.log("From db", book)
+
             if (book) {
                 res.status(200).json(book);
             } else {
@@ -41,7 +45,6 @@ router.get('/:id', (req, res, next) => {
                 })
             }
         }).catch(err => {
-            console.log(err);
             res.status(500).json({error: err});
         });
 });
@@ -55,18 +58,22 @@ router.post('/', (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title,
         author: req.body.author,
-        subject: req.body.subject,
-        isbn: req.body.isbn
+        category: req.body.category,
+        isbn: req.body.isbn,
+        year: req.body.year
     });
     book.save().then(result => {
-        console.log(result);
-
         res.status(201).json({
-            message: 'New book entry was created',
-            createdBook: book
+            message: 'New book was created',
+            createdBook: {
+                title: result.title,
+                author: result.author,
+                category: result.category,
+                isbn: result.isbn,
+                year: result.year
+            }
         });
     }).catch(err => {
-        console.log(err);
         res.status(500).json({
             error: err
         });
@@ -86,11 +93,11 @@ router.patch('/:id', (req, res, next) => {
     Book.update({_id: id}, { $set: updateOps })
     .exec()
     .then(result => {
-        console.log(result);
-        res.status(200).json(result)
+        res.status(200).json({
+            message: 'Book Updated'
+        })
     })
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         });
@@ -106,7 +113,9 @@ router.delete('/:id', (req, res, next) => {
     Book.remove({_id: id})
     .exec()
     .then(result => {
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Book deleted'
+        });
     })
     .catch(err => {
         res.status(500).json({
