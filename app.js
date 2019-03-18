@@ -9,7 +9,6 @@ const userRoutes = require('./api/routes/user');
 
 mongoose.connect('mongodb+srv://theodor_85:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-yqdpw.mongodb.net:/test?retryWrites=true', { useNewUrlParser: true });
 
-
 // Useful middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -34,14 +33,5 @@ app.use((req, res, next) => {
     error.status = 404;
     next(error);
 });
-
-// app.use((error, req, res, next) => {
-//     res.status(error.status || 500);
-//     res.json({
-//         error: {
-//             message: error.message
-//         }
-//     });
-// });
 
 module.exports = app;

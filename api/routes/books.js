@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const authChecker = require('../middleware/authChecker');
 
 const Book = require('../models/book');
 
@@ -55,7 +56,7 @@ router.get('/:id', (req, res, next) => {
 
 //#region CREATE A BOOK
 
-router.post('/', (req, res, next) => {
+router.post('/', authChecker, (req, res, next) => {
     const book = new Book({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title,
@@ -87,7 +88,7 @@ router.post('/', (req, res, next) => {
 
 //#region UPDATE A BOOK
 
-router.patch('/:id', (req, res, next) => {
+router.patch('/:id', authChecker, (req, res, next) => {
     const id = req.params.id;
     const updateOps = {};
     for (const ops of req.body) {
@@ -112,7 +113,7 @@ router.patch('/:id', (req, res, next) => {
 
 //#region DELETE A BOOK
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', authChecker, (req, res, next) => {
     const id = req.params.id;
     Book.remove({_id: id})
     .exec()
