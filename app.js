@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const bookRoutes = require('./api/routes/books');
+const userRoutes = require('./api/routes/user');
 
 mongoose.connect('mongodb+srv://theodor_85:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-yqdpw.mongodb.net:/test?retryWrites=true', { useNewUrlParser: true });
 
@@ -24,8 +25,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routes related to /books that will handle requests
 app.use('/books', bookRoutes);
+app.use('/user', userRoutes);
 
 // Error handling for any other routes
 app.use((req, res, next) => {
