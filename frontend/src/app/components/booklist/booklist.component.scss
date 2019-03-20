@@ -1,1 +1,14 @@
 @import '../../../variables';
+
+table {
+    width: 100%;
+}
+
+.btn-edit {
+    margin-right: 25px;
+    color: $primary-action-btn;
+}
+
+.btn-delete {
+    color: $danger-color;
+}

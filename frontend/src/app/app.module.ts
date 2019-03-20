@@ -9,7 +9,7 @@ import { BookListComponent } from './components/booklist/booklist.component';
 import { NewBookComponent } from './components/new-book/new-book.component';
 import { EditBookComponent } from './components/edit-book/edit-book.component';
 
-import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule, MatTableModule } from '@angular/material';
 import { BookService } from './services/book/book.service';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
@@ -44,6 +44,7 @@ const routes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatTableModule,
     MatPaginatorModule,
     RouterModule.forRoot(routes)
   ],
