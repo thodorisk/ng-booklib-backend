@@ -1,3 +1,29 @@
-<p>
-  login works!
-</p>
+<div class="login-wrapper">
+  <div class="login-content">
+    <form class="login-form">
+      <div class="username-wrapper">
+          <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Username"
+                [(ngModel)]="username"
+                name="username"
+              />
+            </mat-form-field>
+      </div>
+      <div class="password-wrapper">
+          <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Password"
+                [(ngModel)]="password"
+                type="password"
+                name="password"
+              />
+            </mat-form-field>
+      </div>
+    </form>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    <button mat-raised-button class="btn-login" (click)="login()">Login</button>
+  </div>
+</div>
