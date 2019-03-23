@@ -1,16 +1,41 @@
 @import '../../../../variables';
 
+.logout {
+    width: 100%;
+    text-align: right;
+}
+
 table {
     width: 100%;
 }
 
+.toolbar-wrapper {
+    margin: 20px 0;
+    text-align: center;
+
+    .search-wrapper, .action-wrapper {
+        display: inline-block;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+.btn-add {
+    color: $primary-text-color-light;
+    background-color: $primary-color;
+}
+
 .btn-edit {
-    margin-right: 25px;
-    color: $primary-color;
+    margin-right: 20px;
+    color: $secondary-text-color;
 }
 
 .btn-delete {
     color: $accent-color;
+}
+
+.btn-search {
+    background-color: $primary-text-color-light;
 }
 
 td.mat-cell:last-of-type, th.mat-header-cell:last-of-type {

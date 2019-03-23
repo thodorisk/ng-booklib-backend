@@ -1,21 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+interface IUser {
+  username: string,
+  password: string;
+}
+
+@Injectable()
 export class AuthService {
 
-  public uri = 'http://localhost:3000';
+  private uri = 'http://localhost:3000';
+  private loggedInUser: string;
+  private authToken: string;
 
   constructor(private _http: HttpClient) { }
 
-  public login() {
-    let user = {
-      username: 'test',
-      password: 'test'
-    }
+  public authenticateUser(user: IUser) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this._http.post(`${this.uri}/user/login`, user,{headers: headers});
+  }
 
-    return this._http.post(`${this.uri}/login`, user);
+  public logout(): void {
+    console.log(this.authToken);
+    localStorage.removeItem(this.authToken);
+    this.authToken = null;
+    this.loggedInUser = null;
+  }
+
+  public storeToken(data): void {
+    localStorage.setItem('id_token', data.token);
+    //localStorage.setItem('user', data.user);
+    //this.loggedInUser = data.user;
+    this.authToken = data.token;
+  }
+
+  private _getToken(): string {
+    return localStorage.getItem('JWT_TOKEN');
   }
 }

@@ -9,7 +9,7 @@ import { BookListComponent } from './components/smart/booklist/booklist.componen
 import { NewBookComponent } from './components/smart/new-book/new-book.component';
 import { EditBookComponent } from './components/smart/edit-book/edit-book.component';
 
-import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule, MatTableModule, MatSortModule, MatDatepickerModule, MatSelectModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule, MatTableModule, MatSortModule, MatDatepickerModule, MatSelectModule, MatDialogModule, MatIcon } from '@angular/material';
 import { BookService } from './services/book/book.service';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/smart/login/login.component';
@@ -18,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditModalComponent } from './components/presentation/edit-modal/edit-modal.component';
 import { AddModalComponent } from './components/presentation/add-modal/add-modal.component';
 import { DeleteModalComponent } from './components/presentation/delete-modal/delete-modal.component';
+import { AuthService } from './services/auth/auth.service';
+import { ToolbarComponent } from './components/presentation/toolbar/toolbar.component';
 
 const routes: Routes = [
   { path: 'new', canActivate: [AuthGuard], component: NewBookComponent },
@@ -36,7 +38,9 @@ const routes: Routes = [
     LoginComponent,
     EditModalComponent,
     DeleteModalComponent,
-    AddModalComponent
+    AddModalComponent,
+    MatIcon,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,7 @@ const routes: Routes = [
     DeleteModalComponent,
     AddModalComponent
   ],
-  providers: [BookService, AuthGuard],
+  providers: [BookService, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

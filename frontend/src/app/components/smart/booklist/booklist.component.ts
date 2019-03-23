@@ -4,6 +4,8 @@ import { MatPaginator, MatTableDataSource, MatTable, MatSort, MatDialog, MatDial
 import { EditModalComponent } from '../../presentation/edit-modal/edit-modal.component';
 import { DeleteModalComponent } from '../../presentation/delete-modal/delete-modal.component';
 import { AddModalComponent } from '../../presentation/add-modal/add-modal.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 
 export interface PeriodicElement {
@@ -54,8 +56,10 @@ export class BookListComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   public categories: Category[] = [];
+  public isUserLoggedIn: boolean = true;
 
-  constructor(private _service: BookService, public dialog: MatDialog) {
+
+  constructor(private _service: BookService, private _authService: AuthService, public dialog: MatDialog, private _router: Router) {
     this.categories = [
       {value: 'steak-0', name: 'Steak'},
       {value: 'pizza-1', name: 'Pizza'},
@@ -64,7 +68,7 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._service.getBooks().subscribe((books) => {
+    this._service.getBooks().subscribe(books => {
       console.log(books);
     });
 

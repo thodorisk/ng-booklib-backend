@@ -1,3 +1,27 @@
+<mat-toolbar>
+    <span>Book Library Application</span>
+    <ng-container>
+        <div *ngIf="isUserLoggedIn" class="logout">
+            <button mat-button (click)="logout()">Log out</button>
+        </div>
+    </ng-container>
+</mat-toolbar>
+<div class="toolbar-wrapper">
+  <div class="search-wrapper">
+    <mat-form-field class="example-full-width">
+      <input type="search" matInput placeholder="Search..." />
+    </mat-form-field>
+    <button mat-mini-fab class="btn-search">
+      <mat-icon aria-label="Search a book">search</mat-icon>
+    </button>
+  </div>
+  <div class="action-wrapper">
+    <button mat-stroked-button class="btn-add" (click)="openAddDialog()">
+      Add New Book
+    </button>
+  </div>
+</div>
+
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -59,6 +83,6 @@
   #paginator
   [length]="dataSource.length"
   [pageIndex]="0"
-  [pageSize]="15"
+  [pageSize]="14"
 >
 </mat-paginator>
