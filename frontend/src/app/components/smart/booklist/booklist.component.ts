@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { BookService } from 'src/app/services/book/book.service';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatTable, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { EditModalComponent } from '../../presentation/edit-modal/edit-modal.component';
+import { DeleteModalComponent } from '../../presentation/delete-modal/delete-modal.component';
+import { AddModalComponent } from '../../presentation/add-modal/add-modal.component';
+
 
 export interface PeriodicElement {
   name: string;
@@ -32,6 +36,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 20, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
 
+export interface Category {
+  value: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-booklist',
   templateUrl: './booklist.component.html',
@@ -39,11 +48,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class BookListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'category', 'year', 'isbn', 'actions'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(private _service: BookService) { }
+  public categories: Category[] = [];
+
+  constructor(private _service: BookService, public dialog: MatDialog) {
+    this.categories = [
+      {value: 'steak-0', name: 'Steak'},
+      {value: 'pizza-1', name: 'Pizza'},
+      {value: 'tacos-2', name: 'Tacos'}
+    ];
+  }
 
   ngOnInit() {
     this._service.getBooks().subscribe((books) => {
@@ -51,5 +69,30 @@ export class BookListComponent implements OnInit {
     });
 
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  public openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  public openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(DeleteModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  public openAddDialog(): void {
+    const dialogRef = this.dialog.open(AddModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

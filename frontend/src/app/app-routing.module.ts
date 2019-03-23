@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewBookComponent } from './components/new-book/new-book.component';
-import { EditBookComponent } from './components/edit-book/edit-book.component';
-import { BookListComponent } from './components/booklist/booklist.component';
+import { NewBookComponent } from './components/smart/new-book/new-book.component';
+import { EditBookComponent } from './components/smart/edit-book/edit-book.component';
+import { BookListComponent } from './components/smart/booklist/booklist.component';
 
 const routes: Routes = [
   { path: 'new', component: NewBookComponent},

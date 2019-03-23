@@ -1,0 +1,18 @@
+@import '../../../../variables';
+
+table {
+    width: 100%;
+}
+
+.btn-edit {
+    margin-right: 25px;
+    color: $primary-color;
+}
+
+.btn-delete {
+    color: $accent-color;
+}
+
+td.mat-cell:last-of-type, th.mat-header-cell:last-of-type {
+    text-align: center !important;
+}

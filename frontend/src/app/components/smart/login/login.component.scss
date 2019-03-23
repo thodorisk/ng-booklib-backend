@@ -1,11 +1,11 @@
-@import '../../../variables'; 
+@import '../../../../variables'; 
 
 .login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 64px);
-    background-color: $primary-color-light;
+    background-color: $background-color-light;
 
     .login-content {
         width: 300px;
@@ -19,6 +19,7 @@
 
     .btn-login {
         width: 100%;
+        color: $primary-text-color-light;
         background-color: $primary-color;
     }
 }

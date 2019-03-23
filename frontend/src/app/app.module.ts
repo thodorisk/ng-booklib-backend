@@ -5,16 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BookListComponent } from './components/booklist/booklist.component';
-import { NewBookComponent } from './components/new-book/new-book.component';
-import { EditBookComponent } from './components/edit-book/edit-book.component';
+import { BookListComponent } from './components/smart/booklist/booklist.component';
+import { NewBookComponent } from './components/smart/new-book/new-book.component';
+import { EditBookComponent } from './components/smart/edit-book/edit-book.component';
 
-import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule, MatTableModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatPaginator, MatPaginatorModule, MatTableModule, MatSortModule, MatDatepickerModule, MatSelectModule, MatDialogModule } from '@angular/material';
 import { BookService } from './services/book/book.service';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/smart/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditModalComponent } from './components/presentation/edit-modal/edit-modal.component';
+import { AddModalComponent } from './components/presentation/add-modal/add-modal.component';
+import { DeleteModalComponent } from './components/presentation/delete-modal/delete-modal.component';
 
 const routes: Routes = [
   { path: 'new', canActivate: [AuthGuard], component: NewBookComponent },
@@ -30,7 +33,10 @@ const routes: Routes = [
     BookListComponent,
     NewBookComponent,
     EditBookComponent,
-    LoginComponent
+    LoginComponent,
+    EditModalComponent,
+    DeleteModalComponent,
+    AddModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,18 @@ const routes: Routes = [
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
+    MatDatepickerModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDialogModule,
     RouterModule.forRoot(routes)
+  ],
+  entryComponents: [
+    EditModalComponent,
+    DeleteModalComponent,
+    AddModalComponent
   ],
   providers: [BookService, AuthGuard],
   bootstrap: [AppComponent]
