@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 interface IUser {
@@ -24,7 +23,6 @@ export class AuthService {
   }
 
   public logout(): void {
-    console.log(this.authToken);
     localStorage.removeItem(this.authToken);
     this.authToken = null;
     this.loggedInUser = null;
@@ -32,12 +30,6 @@ export class AuthService {
 
   public storeToken(data): void {
     localStorage.setItem('id_token', data.token);
-    //localStorage.setItem('user', data.user);
-    //this.loggedInUser = data.user;
     this.authToken = data.token;
-  }
-
-  private _getToken(): string {
-    return localStorage.getItem('JWT_TOKEN');
   }
 }

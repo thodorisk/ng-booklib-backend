@@ -1,5 +1,6 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, Output, EventEmitter } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { BookService } from 'src/app/services/book/book.service';
 
 @Component({
   selector: "delete-modal",
@@ -7,8 +8,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
   styleUrls: ["./delete-modal.component.scss"]
 })
 export class DeleteModalComponent {
+  @Output() onDeleteClick: EventEmitter<void> = new EventEmitter();
+
   constructor(
     public dialogRef: MatDialogRef<DeleteModalComponent>,
+    private _service: BookService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -16,8 +20,10 @@ export class DeleteModalComponent {
     this.dialogRef.close();
   }
 
-  public save(): void {
+  public delete(id: string): void {
+    //this.onDeleteClick.emit();
+    console.log(id);
+    this._service.deleteBook(id);
     this.dialogRef.close();
-    //save data
   }
 }
