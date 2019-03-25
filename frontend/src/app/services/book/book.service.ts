@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { IBookData } from 'src/app/components/smart/booklist/booklist.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +29,12 @@ export class BookService {
     return localStorage.getItem('id_token');
   }
 
-  public addBook(title: string, author: string, category: string, year: number, isbn: number) {
-    let book = {
-      title: title,
-      author: author,
-      category: category,
-      year: year,
-      isbn: isbn
-    };
+  public addBook(book: IBookData) {
+    this._authToken = 'Bearer'+' '+this._getToken();
 
-    return this._http.post(`${this.uri}/books`, book);
+    let headers = new HttpHeaders().set('Authorization', this._authToken);
+    headers.append('Content-Type', 'application/json');
+    return this._http.post(`${this.uri}/books`, book, {headers: headers});
   }
 
   public updateBook(id: number, title: string, author: string, category: string, isbn: number, year: number) {

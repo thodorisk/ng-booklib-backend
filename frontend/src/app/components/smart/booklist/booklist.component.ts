@@ -64,13 +64,7 @@ export class BookListComponent {
   // }
 
   public openEditDialog(): void {
-    const dialogRef = this.dialog.open(EditModalComponent);
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this._service.addBook().subscribe(res => {
-    //     this._service.getBooks();
-    //   });
-    // });
+    this.dialog.open(EditModalComponent);
   }
 
   public openDeleteDialog(id: string): void {
@@ -86,10 +80,6 @@ export class BookListComponent {
   }
 
   public openAddDialog(): void {
-    const dialogRef = this.dialog.open(AddModalComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.dialog.open(AddModalComponent);
   }
 }
