@@ -63,8 +63,12 @@ export class BookListComponent {
   //   this.dataSource.sort = this.sort;
   // }
 
-  public openEditDialog(): void {
-    this.dialog.open(EditModalComponent);
+  public openEditDialog(book): void {
+    this.dialog.open(EditModalComponent, {
+      data: {
+        book: book
+      }
+    });
   }
 
   public openDeleteDialog(id: string): void {

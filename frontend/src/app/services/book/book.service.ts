@@ -37,16 +37,12 @@ export class BookService {
     return this._http.post(`${this.uri}/books`, book, {headers: headers});
   }
 
-  public updateBook(id: number, title: string, author: string, category: string, isbn: number, year: number) {
-    let book = {
-      title: title,
-      author: author,
-      category: category,
-      isbn: isbn,
-      year: year
-    };
+  public updateBook(id, book) {
+    this._authToken = 'Bearer'+' '+this._getToken();
 
-    return this._http.patch(`${this.uri}/books/${id}`, book);
+    let headers = new HttpHeaders().set('Authorization', this._authToken);
+    headers.append('Content-Type', 'application/json');
+    return this._http.patch(`${this.uri}/books/${id}`, book, {headers: headers});
   }
 
   public deleteBook(id: string) {
