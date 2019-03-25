@@ -1,22 +1,52 @@
 <h1 mat-dialog-title>Add New Book</h1>
 <div mat-dialog-content class="modal-content">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Title" />
+    <input
+      matInput
+      placeholder="Title"
+      [(ngModel)]="title"
+      type="text"
+      name="title"
+    />
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Author" />
+    <input
+      matInput
+      placeholder="Author"
+      [(ngModel)]="author"
+      type="text"
+      name="author"
+    />
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Category" />
+    <input
+      matInput
+      placeholder="Category"
+      [(ngModel)]="category"
+      type="text"
+      name="category"
+    />
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Release Date" />
+    <input
+      matInput
+      placeholder="Release Date"
+      [(ngModel)]="year"
+      type="number"
+      name="year"
+    />
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="ISBN" />
+    <input
+      matInput
+      placeholder="ISBN"
+      [(ngModel)]="isbn"
+      type="text"
+      name="isbn"
+    />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="add()" cdkFocusInitial>Add</button>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add</button>
 </div>

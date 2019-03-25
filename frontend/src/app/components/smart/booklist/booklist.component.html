@@ -8,7 +8,7 @@
 </mat-toolbar>
 <div class="toolbar-wrapper">
   <div class="search-wrapper">
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input type="search" matInput placeholder="Search..." />
     </mat-form-field>
     <button mat-mini-fab class="btn-search">
@@ -68,7 +68,7 @@
       <button
         mat-stroked-button
         class="btn-delete"
-        (click)="openDeleteDialog()"
+        (click)="openDeleteDialog(element._id)"
       >
         Delete
       </button>

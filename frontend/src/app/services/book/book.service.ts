@@ -28,13 +28,13 @@ export class BookService {
     return localStorage.getItem('id_token');
   }
 
-  public addBook(title: string, author: string, category: string, isbn: number, year: number) {
+  public addBook(title: string, author: string, category: string, year: number, isbn: number) {
     let book = {
       title: title,
       author: author,
       category: category,
-      isbn: isbn,
-      year: year
+      year: year,
+      isbn: isbn
     };
 
     return this._http.post(`${this.uri}/books`, book);
@@ -57,7 +57,7 @@ export class BookService {
 
     let headers = new HttpHeaders().set('Authorization', this._authToken);
     headers.append('Content-Type', 'application/json');
-    return this._http.post(`${this.uri}/books/${id}`, {headers: headers});
+    return this._http.delete(`${this.uri}/books/${id}`, {headers: headers});
   }
 }
 

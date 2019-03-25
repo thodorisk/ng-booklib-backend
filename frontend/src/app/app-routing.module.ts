@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   { path: 'new', component: NewBookComponent},
   { path: 'edit/:id', component: EditBookComponent},
-  { path: 'list', component: BookListComponent},
+  { path: 'list', component: BookListComponent}
 ];
 
 @NgModule({

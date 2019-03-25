@@ -35,5 +35,3 @@ export class LoginComponent {
     this._router.navigate(['login']);
   }
 }
-
-//this._router.navigate(["list"]);

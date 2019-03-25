@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
-export interface IBooksData {
+export interface IBookData {
   title: string;
   author: string;
   category: string;
@@ -31,11 +31,11 @@ export class BookListComponent {
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['id', 'title', 'author', 'category', 'year', 'isbn', 'actions'];
-  dataSource: MatTableDataSource<IBooksData>;
+  dataSource: MatTableDataSource<IBookData>;
 
   public categories: ICategory[] = [];
   public isUserLoggedIn: boolean = true;
-  public booksData: IBooksData[];
+  public booksData: IBookData[];
 
   constructor(private _service: BookService, private _authService: AuthService, public dialog: MatDialog, private _router: Router) {
     this.categories = [
@@ -44,7 +44,7 @@ export class BookListComponent {
       {value: 'tacos-2', name: 'Tacos'}
     ];
 
-    this._service.getBooks().subscribe((data: IBooksData[]) => {
+    this._service.getBooks().subscribe((data: IBookData[]) => {
       this.booksData = data;
     });
 
@@ -66,16 +66,22 @@ export class BookListComponent {
   public openEditDialog(): void {
     const dialogRef = this.dialog.open(EditModalComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this._service.addBook().subscribe(res => {
+    //     this._service.getBooks();
+    //   });
+    // });
   }
 
-  public openDeleteDialog(): void {
+  public openDeleteDialog(id: string): void {
     const dialogRef = this.dialog.open(DeleteModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result === true) {
+        this._service.deleteBook(id).subscribe(res => {
+          this._service.getBooks();
+        });
+      }
     });
   }
 
