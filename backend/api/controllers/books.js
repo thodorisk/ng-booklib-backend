@@ -64,7 +64,7 @@ exports.books_update_book = (req, res, next) => {
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
-  Book.update({ _id: id }, { $set: updateOps })
+  Book.updateOne({ _id: id }, { $set: updateOps })
     .exec()
     .then(result => {
       res.status(200).json({
