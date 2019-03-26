@@ -18,9 +18,7 @@ export class EditModalComponent {
     public dialogRef: MatDialogRef<EditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _service: BookService
-  ) {
-    console.log(data);
-  }
+  ) {}
 
   public ngOnInit() {
     this.title = this.data.book.title;
