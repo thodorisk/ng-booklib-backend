@@ -18,11 +18,11 @@ export class BookService {
 
     let headers = new HttpHeaders().set('Authorization', this._authToken);
     headers.append('Content-Type', 'application/json');
-    return this._http.get(`${this.uri}/books`, {headers: headers});
+    return this._http.get('books', {headers: headers});
   }
 
   public getBookById(id: number) {
-    return this._http.get(`${this.uri}/books/${id}`);
+    return this._http.get('books/${id}');
   }
 
   private _getToken(): string {
@@ -34,7 +34,7 @@ export class BookService {
 
     let headers = new HttpHeaders().set('Authorization', this._authToken);
     headers.append('Content-Type', 'application/json');
-    return this._http.post(`${this.uri}/books`, book, {headers: headers});
+    return this._http.post('books', book, {headers: headers});
   }
 
   public updateBook(id, book) {
@@ -42,7 +42,7 @@ export class BookService {
 
     let headers = new HttpHeaders().set('Authorization', this._authToken);
     headers.append('Content-Type', 'application/json');
-    return this._http.patch(`${this.uri}/books/${id}`, book, {headers: headers});
+    return this._http.patch('books/${id}', book, {headers: headers});
   }
 
   public deleteBook(id: string) {
@@ -50,7 +50,7 @@ export class BookService {
 
     let headers = new HttpHeaders().set('Authorization', this._authToken);
     headers.append('Content-Type', 'application/json');
-    return this._http.delete(`${this.uri}/books/${id}`, {headers: headers});
+    return this._http.delete('books/${id}', {headers: headers});
   }
 }
 

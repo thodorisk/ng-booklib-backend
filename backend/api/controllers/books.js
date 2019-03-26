@@ -1,15 +1,12 @@
 const Book = require("../models/book");
+const mongoose = require('mongoose');
 
 exports.books_get_all = (req, res, next) => {
   Book.find()
     .select("_id title author category year isbn")
     .exec()
     .then(books => {
-      const response = {
-        count: books.length,
-        books: books
-      };
-      res.status(200).json(response);
+      res.status(200).json(books);
     })
     .catch(err => {
       console.log(err);
@@ -40,23 +37,25 @@ exports.books_get_book = (req, res, next) => {
 };
 
 exports.books_create_book = (req, res, next) => {
-  const id = req.params.id;
-  Book.findById(id)
-    .select("_id title author category isbn year")
-    .exec()
-    .then(book => {
-      if (book) {
-        res.status(200).json(book);
-      } else {
-        res.status(404).json({
-          message: "No valid entry found for the provided id"
-        });
-      }
+  const book = new Book ({
+    _id: new mongoose.Types.ObjectId(),
+    title: req.body.title,
+    author: req.body.title,
+    category: req.body.category,
+    year: req.body.year,
+    isbn: req.body.isbn
+  })
+
+  book
+    .save()
+    .then(result => {
+      console.log(result);
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
+    .catch(err => console.log(err));
+
+  res.status(201).json({
+    newBook: book
+  });
 };
 
 exports.books_update_book = (req, res, next) => {
