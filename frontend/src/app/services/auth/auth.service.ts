@@ -19,7 +19,7 @@ export class AuthService {
   public authenticateUser(user: IUser) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('user/login', user,{headers: headers});
+    return this._http.post(`${this.uri}/user/login`, user,{headers: headers});
   }
 
   public logout(): void {
