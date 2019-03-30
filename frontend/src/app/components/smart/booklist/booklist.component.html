@@ -1,10 +1,5 @@
 <mat-toolbar>
     <span>Book Library Application</span>
-    <!-- <ng-container>
-        <div *ngIf="isUserLoggedIn" class="logout">
-            <button mat-button (click)="logout()">Log out</button>
-        </div>
-    </ng-container> -->
 </mat-toolbar>
 <div class="toolbar-wrapper">
   <div class="search-wrapper">
@@ -20,6 +15,11 @@
       Add New Book
     </button>
   </div>
+  <ng-container>
+    <div *ngIf="isUserLoggedIn" class="logout">
+        <button mat-button (click)="logout()">Log out</button>
+    </div>
+  </ng-container>
 </div>
 
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">

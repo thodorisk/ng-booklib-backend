@@ -28,11 +28,11 @@ app.use((req, res, next) => {
 app.use('/books', bookRoutes);
 app.use('/user', userRoutes);
 
-// Error handling for any other routes
-app.use((req, res, next) => {
-    const error = new Error('Not found');
-    error.status = 404;
-    next(error);
-});
+// // Error handling for any other routes
+// app.use((req, res, next) => {
+//     const error = new Error('Not found');
+//     error.status = 404;
+//     next(error);
+// });
 
 module.exports = app;
